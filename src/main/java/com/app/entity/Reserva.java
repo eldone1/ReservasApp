@@ -20,6 +20,8 @@ public class Reserva {
     private Long id;
 
     private LocalDateTime fechaHora;
+
+    @Column(name = "cantidad_personas")
     private Integer cantidadPersonas;
 
     @Enumerated(EnumType.STRING)
