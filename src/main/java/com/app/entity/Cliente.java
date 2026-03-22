@@ -21,7 +21,7 @@ public class Cliente {
     private Integer id;
 
     @Column(unique = true)
-    private String username;
+    private String email;
 
     @Column(nullable = false)
     private String password;
