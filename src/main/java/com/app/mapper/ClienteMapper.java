@@ -1,6 +1,7 @@
 package com.app.mapper;
 
 import com.app.dto.ClienteDTO;
+import com.app.dto.RegisterDTO;
 import com.app.dto.ReservaDTO;
 import com.app.entity.Cliente;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,9 @@ public class ClienteMapper {
 
     public ClienteDTO toDTO(Cliente cliente) {
         if (cliente == null) return null;
-        List<ReservaDTO> reservas = cliente.getReservas().stream()
+        List<ReservaDTO> reservas = cliente.getReservas() == null
+                ? new ArrayList<>()
+                : cliente.getReservas().stream()
                 .map(res -> ReservaDTO.builder()
                         .id(res.getId())
                         .fechaHora(res.getFechaHora())
@@ -36,5 +39,13 @@ public class ClienteMapper {
                 .email(clienteDTO.getEmail())
                 .build();
 
+    }
+
+    public Cliente toEntity(RegisterDTO registerDTO) {
+        if (registerDTO == null) return null;
+        return  Cliente.builder()
+                .nombre(registerDTO.getNombre())
+                .email(registerDTO.getEmail())
+                .build();
     }
 }
